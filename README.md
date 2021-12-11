@@ -1,6 +1,6 @@
 ## Movie Finder
 
-This is a movie finder application using [OMDB API](http://omdbapi.com) for backend.
+This is a movie finder application that uses [OMDB API](http://omdbapi.com) for finding movies/series.
 
 - Design and implement Splash screen
   - [x] Check internet connectivity
