@@ -17,7 +17,7 @@ class SplashScreenViewModel {
     }
     
     func getInitialText() -> Observable<String> {
-        return FirebaseService.shared.fetchRemoteString(by: splashRemoteConfigKey, defaultValue: "Loodos")
+        return FirebaseService.shared.fetchRemoteConfig(for: splashRemoteConfigKey, defaultValue: "Loodos")
     }
     
     func gotoHomeScreen() {

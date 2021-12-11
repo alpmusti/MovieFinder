@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Reachability
 
-class SplashScreenViewController: UIViewController, StoryboardInstantiable, Alertable {
+class SplashScreenViewController: UIViewController, StoryboardInstantiable, Alertable, Loadable {
     
     @IBOutlet weak var splashTextLabel: UILabel!
     
@@ -31,18 +31,37 @@ class SplashScreenViewController: UIViewController, StoryboardInstantiable, Aler
         }
         
         reachability?.whenUnreachable = { [weak self] _ in
+            self?.setDefaultText()
             self?.showAlert(message: "You are seems to be offline. Please check your connection and try again later.")
         }
-
+        
         try? reachability?.startNotifier()
     }
     
     private func setupLabel() {
+        showLoading()
         viewModel?.getInitialText()
-            .bind(to: splashTextLabel.rx.text)
+            .subscribe(onNext: { [weak self] text in
+                self?.hideLoading()
+                self?.splashTextLabel.text = text
+                self?.gotoHomeScreen()
+            }, onError: { [weak self] _ in
+                self?.hideLoading()
+                self?.setDefaultText()
+                self?.gotoHomeScreen()
+            })
             .disposed(by: disposeBag)
+    }
+    
+    private func gotoHomeScreen() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             self?.viewModel?.gotoHomeScreen()
+        }
+    }
+    
+    private func setDefaultText() {
+        DispatchQueue.main.async { [weak self] in
+            self?.splashTextLabel.text = "Loodos"
         }
     }
     
