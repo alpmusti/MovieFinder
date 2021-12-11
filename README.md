@@ -11,6 +11,8 @@ This is a movie finder application that uses [OMDB API](http://omdbapi.com) for 
   - [x] Showing movie details implemented
   - [x] Logging firebase event
 
+
+### 🚨🚨 NOTICE 🚨🚨
 **I've implemented remote notifications part with `Firebase Messaging`. However, I don't have any available Apple developer account currently. Because of that I couldn't send remote notification so I couldn't try whether remote notifications are working or not.**
 
 ### High Level Overview of Architecture
@@ -33,6 +35,6 @@ In this project we have only implemented networking layer for communication with
 
 ## Installation
 
-This project uses 3rd party dependencies. In order to install 3rd party dependencies run the command below
+This project uses dependencies. In order to install dependencies run the command below
 
 `pod install`
